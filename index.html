@@ -3,154 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DaTools - Free Online Tools</title>
-  <meta name="description" content="DaTools offers free online tools like Background Remover, PDF Merger, Image Rotator, Text to PDF and more. Fast, secure, and 100% free.">
+  <title>DaTools - Free Background Remover</title>
+  <meta name="description" content="Free online AI Background Remover tool. Remove image backgrounds instantly with one click. Fast, secure & 100% free.">
   <link rel="canonical" href="https://datools.site/">
 
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background: #f3f4f6;
+      background: #fef2f2;
       color: #333;
     }
 
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
     header {
-      background: #2563eb;
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
       color: #fff;
-      padding: 20px;
+      padding: 25px;
       text-align: center;
     }
 
     header h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin-top: 5px;
+      font-size: 16px;
     }
 
     .tools-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
     }
 
     .tool-card {
-      background: #fff;
-      padding: 25px;
-      border-radius: 15px;
+      background: #fff5f5;
+      padding: 30px;
+      border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      max-width: 350px;
+      width: 100%;
     }
 
     .tool-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(185,28,28,0.3);
     }
 
     .tool-icon {
-      font-size: 40px;
+      font-size: 50px;
       margin-bottom: 15px;
-      color: #2563eb;
+      color: #dc2626;
     }
 
     .tool-card h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #b91c1c;
     }
 
     .tool-card p {
-      font-size: 14px;
+      font-size: 15px;
       color: #555;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .tool-card a {
       display: inline-block;
-      padding: 10px 20px;
-      background: #2563eb;
+      padding: 12px 20px;
+      background: #dc2626;
       color: #fff;
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s ease;
+      font-weight: bold;
     }
 
     .tool-card a:hover {
-      background: #1d4ed8;
+      background: #b91c1c;
+    }
+
+    .about-section {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      color: #dc2626;
+      margin-bottom: 15px;
+    }
+
+    .about-section p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .ad-banner {
+      background: #fef2f2;
+      border: 2px dashed #fca5a5;
+      padding: 20px;
+      margin: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: #b91c1c;
+      border-radius: 10px;
     }
 
     footer {
+      background: #f9fafb;
+      padding: 20px;
       text-align: center;
-      padding: 15px;
-      background: #e5e7eb;
-      margin-top: 20px;
       font-size: 14px;
-      color: #444;
+      color: #555;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    footer a {
+      color: #dc2626;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>DaTools - Free Online Tools</h1>
-    <p>Simple, Fast & Secure Online Tools for Everyone</p>
-  </header>
+  <div class="container">
 
-  <div class="tools-container">
-    
-    <!-- Background Remover -->
-    <div class="tool-card">
-      <div class="tool-icon">🖼️</div>
-      <h2>Background Remover</h2>
-      <p>Remove background from images instantly with one click.</p>
-      <a href="bg-remover.html">Use Tool</a>
+    <header>
+      <h1>DaTools - Free Background Remover</h1>
+      <p>Remove image backgrounds instantly with AI — 100% free and secure.</p>
+    </header>
+
+    <div class="ad-banner">Advertisement Space (728x90)</div>
+
+    <div class="tools-container">
+      <!-- Background Remover Tool Box -->
+      <div class="tool-card">
+        <div class="tool-icon">🖼️</div>
+        <h2>Background Remover</h2>
+        <p>Upload your photo and remove the background automatically in seconds.</p>
+        <a href="bg-remover.html">Use Tool</a>
+      </div>
     </div>
 
-    <!-- PDF Merger -->
-    <div class="tool-card">
-      <div class="tool-icon">📑</div>
-      <h2>PDF Merger</h2>
-      <p>Combine multiple PDF files into one easily.</p>
-      <a href="pdf-merger.html">Use Tool</a>
-    </div>
+    <div class="ad-banner">Advertisement Space (300x250)</div>
 
-    <!-- Image Rotator -->
-    <div class="tool-card">
-      <div class="tool-icon">🔄</div>
-      <h2>Image Rotator</h2>
-      <p>Rotate your images online quickly and download them.</p>
-      <a href="rotate-image.html">Use Tool</a>
-    </div>
+    <section class="about-section">
+      <h2>About This Tool</h2>
+      <p>Our free Background Remover tool allows you to easily remove the background of any image online. It uses AI to detect the subject and cut out the background automatically.</p>
+      <p>No signup required, no hidden charges — just upload your image, and download your result in seconds.</p>
+      <p>We respect your privacy. Your images are processed securely and never stored on our servers.</p>
+    </section>
 
-    <!-- Text to PDF -->
-    <div class="tool-card">
-      <div class="tool-icon">📄</div>
-      <h2>Text to PDF</h2>
-      <p>Convert your text files into PDF instantly.</p>
-      <a href="text-to-pdf.html">Use Tool</a>
-    </div>
-
-    <!-- Add more tools -->
-    <div class="tool-card">
-      <div class="tool-icon">✂️</div>
-      <h2>Image Cropper</h2>
-      <p>Crop and resize your images online easily.</p>
-      <a href="image-cropper.html">Use Tool</a>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-icon">📝</div>
-      <h2>Text Editor</h2>
-      <p>Edit your text online with a clean editor.</p>
-      <a href="text-editor.html">Use Tool</a>
-    </div>
+    <footer>
+      <p>© 2025 DaTools.site — All Rights Reserved.</p>
+      <p>
+        <a href="privacy-policy.html">Privacy Policy</a> |
+        <a href="terms.html">Terms & Conditions</a> |
+        <a href="disclaimer.html">Disclaimer</a>
+      </p>
+    </footer>
 
   </div>
-
-  <footer>
-    © 2025 DaTools.site — All Rights Reserved.
-  </footer>
 
 </body>
 </html>
