@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaTools - Free Online Tools for Everyone</title>
+    <meta name="description" content="DaTools offers free online tools including background remover, image editor, and more. Easy to use, no registration required.">
+    <meta name="keywords" content="free online tools, background remover, image tools, pdf tools, online utilities">
+    <meta name="author" content="DaTools">
+    <link rel="canonical" href="https://datools.com">
+    <meta property="og:title" content="DaTools - Free Online Tools">
+    <meta property="og:description" content="Free online tools for image editing, PDF processing, and more">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(220, 38, 38, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🔧";
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #dc2626;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Ad Placeholder */
+        .ad-banner {
+            background: #f3f4f6;
+            border: 2px dashed #d1d5db;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        /* Tools Grid */
+        .tools-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #dc2626;
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.2);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            color: #dc2626;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .tool-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            color: #dc2626;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content h2 {
+            color: #dc2626;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #dc2626;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .contact-email:hover {
+            background: #b91c1c;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">DaTools</a>
+                <nav>
+                    <ul>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Free Online Tools for Everyone</h1>
+                <p>Professional-grade tools to enhance your productivity. Remove backgrounds, edit images, process PDFs, and much more - all for free!</p>
+                
+                <!-- Ad Banner -->
+                <div class="ad-banner">
+                    <p>Advertisement Space - 728x90</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="tools-section">
+            <div class="container">
+                <h2 class="section-title">Our Tools</h2>
+                
+                <div class="tools-grid">
+                    <a href="background-remover.html" class="tool-card">
+                        <div class="tool-icon">🖼️</div>
+                        <h3>Background Remover</h3>
+                        <p>Remove image backgrounds instantly with AI. Perfect for product photos, portraits, and graphics.</p>
+                    </a>
+
+                    <div class="tool-card" style="opacity: 0.7; pointer-events: none;">
+                        <div class="tool-icon">📄</div>
+                        <h3>PDF Converter</h3>
+                        <p>Convert PDFs to various formats and vice versa. Coming soon!</p>
+                    </div>
+
+                    <div class="tool-card" style="opacity: 0.7; pointer-events: none;">
+                        <div class="tool-icon">📏</div>
+                        <h3>Image Resizer</h3>
+                        <p>Resize images while maintaining quality. Multiple format support. Coming soon!</p>
+                    </div>
+
+                    <div class="tool-card" style="opacity: 0.7; pointer-events: none;">
+                        <div class="tool-icon">🔒</div>
+                        <h3>PDF Protector</h3>
+                        <p>Add passwords and encrypt your PDF documents. Coming soon!</p>
+                    </div>
+
+                    <div class="tool-card" style="opacity: 0.7; pointer-events: none;">
+                        <div class="tool-icon">✂️</div>
+                        <h3>Image Cropper</h3>
+                        <p>Crop images to perfect dimensions with precision tools. Coming soon!</p>
+                    </div>
+
+                    <div class="tool-card" style="opacity: 0.7; pointer-events: none;">
+                        <div class="tool-icon">🎨</div>
+                        <h3>Color Palette</h3>
+                        <p>Extract colors from images and create beautiful palettes. Coming soon!</p>
+                    </div>
+                </div>
+
+                <!-- Ad Banner -->
+                <div class="ad-banner">
+                    <p>Advertisement Space - 728x90</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About DaTools</h2>
+                    <p>DaTools is your go-to destination for free online tools that make your digital life easier. We believe that powerful tools should be accessible to everyone, without the need for expensive software or complicated installations.</p>
+                    <p>Our mission is to provide high-quality, user-friendly tools that help individuals, students, professionals, and businesses accomplish their tasks efficiently. From image editing to document processing, we've got you covered.</p>
+                    <p>All our tools are designed with privacy in mind. We don't store your files, and all processing happens securely. Your data remains yours.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <h2>Get in Touch</h2>
+                    <p>Have questions, suggestions, or need support? We'd love to hear from you!</p>
+                    <a href="mailto:Afnanwork4@gmail.com" class="contact-email">
+                        📧 Afnanwork4@gmail.com
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DaTools. All rights reserved. | Free tools for everyone.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "DaTools",
+        "description": "Free online tools for image editing, PDF processing, and more",
+        "url": "https://datools.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://datools.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Google Analytics placeholder -->
+    <script>
+        // Google Analytics code will go here
+        // gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>
