@@ -6,89 +6,19 @@
 <title>Register - DaTools</title>
 <link rel="icon" type="image/png" sizes="16x16" href="datools logo/favicon-16x16.png">
 <style>
-/* Reset & body */
-body {
-    margin: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Container */
-.register-container {
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    width: 360px;
-    max-width: 90%;
-    text-align: center;
-}
-
-/* Header */
-.register-container h2 {
-    color: #e53935;
-    font-size: 28px;
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-/* Inputs */
-.register-container input {
-    width: 100%;
-    padding: 14px 12px;
-    margin: 12px 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-.register-container input:focus {
-    border-color: #e53935;
-    box-shadow: 0 0 6px rgba(229,57,53,0.3);
-    outline: none;
-}
-
-/* Button */
-.register-container button {
-    width: 100%;
-    padding: 14px;
-    background: #e53935;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.register-container button:hover {
-    background: #d32f2f;
-    box-shadow: 0 4px 12px rgba(211,47,47,0.3);
-}
-
-/* Footer text */
-.register-container p {
-    font-size: 14px;
-    color: #555;
-    margin-top: 18px;
-}
-
-.register-container p a {
-    color: #e53935;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.register-container p a:hover {
-    text-decoration: underline;
-}
+body {margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#f8f8f8;display:flex;justify-content:center;align-items:center;height:100vh;}
+.register-container {background:#fff;padding:40px 30px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1);width:360px;max-width:90%;text-align:center;}
+.register-container h2 {color:#e53935;font-size:28px;margin-bottom:25px;font-weight:600;}
+.register-container input {width:100%;padding:14px 12px;margin:12px 0;border-radius:8px;border:1px solid #ddd;font-size:15px;transition:all 0.3s ease;}
+.register-container input:focus {border-color:#e53935;box-shadow:0 0 6px rgba(229,57,53,0.3);outline:none;}
+.register-container button {width:100%;padding:14px;background:#e53935;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:500;cursor:pointer;transition:all 0.3s ease;margin-top:10px;}
+.register-container button:hover {background:#d32f2f;box-shadow:0 4px 12px rgba(211,47,47,0.3);}
+.register-container p {font-size:14px;color:#555;margin-top:18px;}
+.register-container p a {color:#e53935;text-decoration:none;font-weight:500;}
+.register-container p a:hover {text-decoration:underline;}
+.google-btn {background:#fff;color:#555;border:1px solid #ddd;margin-top:12px;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:8px;cursor:pointer;transition:all 0.3s ease;}
+.google-btn img {width:20px;margin-right:8px;}
+.google-btn:hover {box-shadow:0 2px 6px rgba(0,0,0,0.15);}
 </style>
 </head>
 <body>
@@ -98,12 +28,15 @@ body {
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password (6+ chars)">
     <button id="registerBtn">Register</button>
+    <div id="googleRegisterBtn" class="google-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">Register with Google
+    </div>
     <p>Already have an account? <a href="login.html">Login</a></p>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -120,6 +53,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Email register
 document.getElementById("registerBtn").addEventListener("click", async ()=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -132,6 +66,18 @@ document.getElementById("registerBtn").addEventListener("click", async ()=>{
         })
         .catch(err=>alert(err.message));
     } else { alert("Please enter email and password"); }
+});
+
+// Google register
+const provider = new GoogleAuthProvider();
+document.getElementById("googleRegisterBtn").addEventListener("click", ()=>{
+    signInWithPopup(auth, provider)
+    .then(async (result)=>{
+        const user = result.user;
+        await setDoc(doc(db,"users",user.uid),{email:user.email,vip:false,lastLogin:serverTimestamp()},{merge:true});
+        window.location.href = "index.html";
+    })
+    .catch(err=>alert(err.message));
 });
 </script>
 
