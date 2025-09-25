@@ -6,89 +6,19 @@
 <title>Login - DaTools</title>
 <link rel="icon" type="image/png" sizes="16x16" href="datools logo/favicon-16x16.png">
 <style>
-/* Reset & basic body */
-body {
-    margin: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Container */
-.login-container {
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    width: 360px;
-    max-width: 90%;
-    text-align: center;
-}
-
-/* Header */
-.login-container h2 {
-    color: #e53935;
-    font-size: 28px;
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-/* Inputs */
-.login-container input {
-    width: 100%;
-    padding: 14px 12px;
-    margin: 12px 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-.login-container input:focus {
-    border-color: #e53935;
-    box-shadow: 0 0 6px rgba(229,57,53,0.3);
-    outline: none;
-}
-
-/* Button */
-.login-container button {
-    width: 100%;
-    padding: 14px;
-    background: #e53935;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.login-container button:hover {
-    background: #d32f2f;
-    box-shadow: 0 4px 12px rgba(211,47,47,0.3);
-}
-
-/* Footer text */
-.login-container p {
-    font-size: 14px;
-    color: #555;
-    margin-top: 18px;
-}
-
-.login-container p a {
-    color: #e53935;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.login-container p a:hover {
-    text-decoration: underline;
-}
+body {margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#f8f8f8;display:flex;justify-content:center;align-items:center;height:100vh;}
+.login-container {background:#fff;padding:40px 30px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.1);width:360px;max-width:90%;text-align:center;}
+.login-container h2 {color:#e53935;font-size:28px;margin-bottom:25px;font-weight:600;}
+.login-container input {width:100%;padding:14px 12px;margin:12px 0;border-radius:8px;border:1px solid #ddd;font-size:15px;transition:all 0.3s ease;}
+.login-container input:focus {border-color:#e53935;box-shadow:0 0 6px rgba(229,57,53,0.3);outline:none;}
+.login-container button {width:100%;padding:14px;background:#e53935;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:500;cursor:pointer;transition:all 0.3s ease;margin-top:10px;}
+.login-container button:hover {background:#d32f2f;box-shadow:0 4px 12px rgba(211,47,47,0.3);}
+.login-container p {font-size:14px;color:#555;margin-top:18px;}
+.login-container p a {color:#e53935;text-decoration:none;font-weight:500;}
+.login-container p a:hover {text-decoration:underline;}
+.google-btn {background:#fff;color:#555;border:1px solid #ddd;margin-top:12px;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:8px;cursor:pointer;transition:all 0.3s ease;}
+.google-btn img {width:20px;margin-right:8px;}
+.google-btn:hover {box-shadow:0 2px 6px rgba(0,0,0,0.15);}
 </style>
 </head>
 <body>
@@ -98,12 +28,16 @@ body {
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button id="loginBtn">Login</button>
+    <div id="googleLoginBtn" class="google-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">Login with Google
+    </div>
     <p>Don't have an account? <a href="register.html">Register</a></p>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDZJLeVm2eV0ib5QcokdZ6aguZ_UmF0V64",
@@ -117,7 +51,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
+// Email login
 document.getElementById("loginBtn").addEventListener("click", ()=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -126,6 +62,18 @@ document.getElementById("loginBtn").addEventListener("click", ()=>{
         .then(()=>{ alert("Logged in successfully"); window.location.href = "index.html"; })
         .catch(err=>alert(err.message));
     } else { alert("Please enter email and password"); }
+});
+
+// Google login
+const provider = new GoogleAuthProvider();
+document.getElementById("googleLoginBtn").addEventListener("click", ()=>{
+    signInWithPopup(auth, provider)
+    .then(async (result)=>{
+        const user = result.user;
+        await setDoc(doc(db,"users",user.uid), {email:user.email,vip:false,lastLogin:serverTimestamp()},{merge:true});
+        window.location.href = "index.html";
+    })
+    .catch(err=>alert(err.message));
 });
 </script>
 
