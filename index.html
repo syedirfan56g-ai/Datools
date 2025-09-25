@@ -3,77 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DaTools - Free Background & Video Remover</title>
-<meta name="description" content="Free online AI Background Remover & Video Background Remover. Secure & fast.">
+<title>DaTools - Free Background Tools</title>
+<meta name="description" content="Free AI Background Remover & Video Background Remover. Secure, fast, 100% free.">
 <link rel="canonical" href="https://datools.site/">
 
-<!-- Favicons -->
+<!-- Website Favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="datools logo/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="datools logo/favicon-16x16.png">
 
 <style>
-body {margin:0; font-family: Arial,sans-serif; background:#fef2f2; color:#333;}
-header {display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:linear-gradient(135deg,#dc2626,#b91c1c); color:#fff;}
-.header-left a {margin-right:20px; color:#fff; text-decoration:none; font-weight:bold;}
-.header-left a:hover{text-decoration:underline;}
-.header-right a {margin-left:15px; padding:6px 12px; background:#fff; color:#dc2626; border-radius:6px; text-decoration:none; font-weight:bold;}
-.header-right a:hover {background:#f3f3f3;}
-.container {max-width:1200px; margin:30px auto; padding:0 20px;}
-.tools-container {display:flex; gap:20px; justify-content:center; flex-wrap:wrap;}
-.tool-card {background:#fff5f5; padding:25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; transition:0.3s; max-width:300px; cursor:pointer;}
-.tool-card:hover {transform:translateY(-8px); box-shadow:0 8px 20px rgba(185,28,28,0.3);}
-.tool-card h2 {color:#b91c1c; margin-bottom:10px;}
-.tool-card p {color:#555; font-size:14px; margin-bottom:15px;}
-.tool-card a {display:inline-block; padding:10px 18px; background:#dc2626; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold;}
-.tool-card a:hover {background:#b91c1c;}
-footer {background:#f9fafb; text-align:center; padding:20px; border-top:1px solid #e5e7eb; font-size:14px; color:#555;}
-footer a {margin:0 8px; text-decoration:none; color:#dc2626;}
-footer a:hover{text-decoration:underline;}
+body {font-family: Arial, sans-serif; margin:0; background:#fef2f2; color:#333;}
+header {display:flex; justify-content:space-between; align-items:center; padding:15px 25px; background:linear-gradient(135deg,#dc2626,#b91c1c); color:#fff; position:relative;}
+header .left-nav {display:flex; align-items:center; gap:15px;}
+header .logo {font-weight:bold; font-size:1.5rem; cursor:pointer;}
+header .nav-links a {color:#fff; text-decoration:none; margin-left:10px;}
+header .nav-links a:hover{text-decoration:underline;}
+header .right-nav {display:flex; align-items:center; gap:8px;}
+header button {background:#fff;color:#b91c1c;border:none;padding:8px 15px;border-radius:5px; cursor:pointer;}
+header button:hover{background:#f3f3f3;}
+.profile-dropdown {display:none;position:absolute; top:60px; right:25px; background:#fff; color:#333; padding:15px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.container {max-width:900px; margin:20px auto;}
+.tools-container {display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:20px;}
+.tool-card {background:#fff5f5; padding:25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); text-align:center; width:280px; transition:0.3s;}
+.tool-card:hover{transform:translateY(-6px);box-shadow:0 6px 20px rgba(185,28,28,0.3);}
+.tool-icon{font-size:50px;margin-bottom:12px;color:#dc2626;}
+.tool-card h2{color:#b91c1c;margin-bottom:8px;}
+.tool-card p{color:#555;margin-bottom:12px;}
+.tool-card a{display:inline-block;padding:10px 18px;background:#dc2626;color:#fff;border-radius:8px;text-decoration:none;font-weight:bold;}
+.tool-card a:hover{background:#b91c1c;}
+.ad-banner{background:#fef2f2;border:2px dashed #fca5a5;padding:20px;margin:20px;text-align:center;font-size:14px;color:#b91c1c;border-radius:10px;}
+.about-section {padding:30px; text-align:center; margin-top:40px;}
+.about-section h2 {color:#dc2626; margin-bottom:15px;}
+.about-section p {font-size:15px;color:#444; line-height:1.6; margin-bottom:15px;}
 </style>
 </head>
-<body>
 
+<body>
 <header>
-<div class="header-left">
-  <a href="#">About</a>
-  <a href="disclaimer.html">Disclaimer</a>
-  <a href="privacy-policy.html">Privacy</a>
-  <a href="terms.html">Terms</a>
-  <a href="contact.html">Contact</a>
-</div>
-<div class="header-right">
-  <a href="login.html">Login</a>
-  <a href="register.html">Register</a>
-  <a href="profile.html">Profile</a>
-</div>
+  <div class="left-nav">
+    <div class="logo" onclick="window.scrollTo({top:document.querySelector('.about-section').offsetTop, behavior:'smooth'})">DaTools</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="right-nav">
+    <!-- Redirect buttons to separate pages -->
+    <button id="login-btn" onclick="window.location.href='login.html'">Login</button>
+    <button id="register-btn" onclick="window.location.href='register.html'">Register</button>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <button id="profile-btn" style="display:none;" onclick="window.location.href='profile.html'">Profile</button>
+    <div id="profile-dropdown" class="profile-dropdown">
+      <p id="profile-email">Email</p>
+      <p id="last-login">Last login</p>
+      <p id="vip-status">Membership</p>
+    </div>
+  </div>
 </header>
 
 <div class="container">
+  <div class="ad-banner">Advertisement Space (728x90)</div>
   <div class="tools-container">
+    <!-- Background Remover Card -->
     <div class="tool-card">
-      <div style="font-size:50px; margin-bottom:10px;">🖼️</div>
+      <div class="tool-icon">🖼️</div>
       <h2>Background Remover</h2>
-      <p>Upload your image and remove the background automatically.</p>
+      <p>Upload your photo and remove the background automatically in seconds.</p>
       <a href="background-remover.html">Use Tool</a>
     </div>
+    <!-- Video Background Remover Card -->
     <div class="tool-card">
-      <div style="font-size:50px; margin-bottom:10px;">🎬</div>
+      <div class="tool-icon">🎥</div>
       <h2>Video Background Remover</h2>
-      <p>Remove the background from your videos quickly and easily.</p>
+      <p>Remove background from videos online easily using AI.</p>
       <a href="video-bg-remover.html">Use Tool</a>
     </div>
   </div>
+  <div class="ad-banner">Advertisement Space (300x250)</div>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <h2>About DaTools</h2>
+    <p>Our free Background and Video Background Remover tools allow you to easily remove backgrounds from images and videos online. AI detects subjects automatically.</p>
+    <p>No signup required, secure processing, fast results. Users who register can track their profile, VIP status, and manage memberships.</p>
+  </section>
 </div>
-
-<footer>
-<p>© 2025 DaTools.site — All Rights Reserved.</p>
-<p>
-<a href="privacy-policy.html">Privacy Policy</a> |
-<a href="terms.html">Terms & Conditions</a> |
-<a href="disclaimer.html">Disclaimer</a> |
-<a href="contact.html">Contact Us</a>
-</p>
-</footer>
-
 </body>
 </html>
