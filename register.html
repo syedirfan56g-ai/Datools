@@ -16,9 +16,33 @@ body {margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;backgroun
 .register-container p {font-size:14px;color:#555;margin-top:18px;}
 .register-container p a {color:#e53935;text-decoration:none;font-weight:500;}
 .register-container p a:hover {text-decoration:underline;}
-.google-btn {background:#fff;color:#555;border:1px solid #ddd;margin-top:12px;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:8px;cursor:pointer;transition:all 0.3s ease;}
-.google-btn img {width:20px;margin-right:8px;}
-.google-btn:hover {box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+
+/* Google Button */
+.google-btn {
+  background:#fff;
+  color:#555;
+  border:1px solid #ddd;
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-weight:500;
+  font-size:15px;
+}
+
+.google-btn img {
+  width:20px;
+  height:20px;
+  margin-right:8px;
+}
+
+.google-btn:hover {
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
 </style>
 </head>
 <body>
@@ -29,7 +53,8 @@ body {margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;backgroun
     <input type="password" id="password" placeholder="Password (6+ chars)">
     <button id="registerBtn">Register</button>
     <div id="googleRegisterBtn" class="google-btn">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">Register with Google
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">
+        Register with Google
     </div>
     <p>Already have an account? <a href="login.html">Login</a></p>
 </div>
