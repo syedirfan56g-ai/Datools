@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - DaTools</title>
+<link rel="icon" type="image/png" sizes="16x16" href="datools logo/favicon-16x16.png">
+<style>
+body {font-family: Arial, sans-serif; background:#fef2f2; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
+.register-container {background:#fff; padding:30px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.15); width:350px; text-align:center;}
+.register-container h2 {color:#dc2626; margin-bottom:20px;}
+.register-container input {width:100%; padding:10px; margin:10px 0; border-radius:6px; border:1px solid #ccc;}
+.register-container button {background:#dc2626;color:#fff;border:none;padding:10px 20px;border-radius:6px; cursor:pointer;}
+.register-container button:hover{background:#b91c1c;}
+.register-container p {font-size:14px; margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div class="register-container">
+<h2>Register</h2>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password (6+ chars)">
+<button id="registerBtn">Register</button>
+<p>Already have an account? <a href="login.html">Login</a></p>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDZJLeVm2eV0ib5QcokdZ6aguZ_UmF0V64",
+  authDomain: "datools-1fad4.firebaseapp.com",
+  projectId: "datools-1fad4",
+  storageBucket: "datools-1fad4.firebasestorage.app",
+  messagingSenderId: "573181909357",
+  appId: "1:573181909357:web:9f071661ed3d493ddb6264",
+  measurementId: "G-QCSSS49JCL"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+document.getElementById("registerBtn").addEventListener("click", async ()=>{
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    if(email && password){
+        createUserWithEmailAndPassword(auth,email,password)
+        .then(async (cred)=>{
+            await setDoc(doc(db,"users",cred.user.uid),{vip:false,lastLogin:serverTimestamp()});
+            alert("Registered successfully"); 
+            window.location.href = "index.html";
+        })
+        .catch(err=>alert(err.message));
+    } else { alert("Please enter email and password"); }
+});
+</script>
+
+</body>
+</html>
