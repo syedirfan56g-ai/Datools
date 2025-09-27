@@ -1,356 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>DaTools - Free Background Remover</title>
-<meta name="description" content="Remove the background from your images for free — fast, secure, and easy. DaTools Image Background Remover." />
-<link rel="canonical" href="https://datools.site/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Remove the background from your image for free with datools.site. Easy-to-use background removal tool similar to Adobe Express. No credit card required.">
+    <meta name="keywords" content="background remover, image editing, photo editing, free tools, adobe express alternative">
+    <meta name="author" content="syed afnan sav">
+    <title>datools.site - Free Background Remover Tool</title>
+    <link rel="canonical" href="https://datools.site">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- Favicons (kept same paths from your original file; change if needed) -->
-<link rel="icon" type="image/png" sizes="16x16" href="datools logo/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="datools logo/favicon-16x16.png">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
 
-<!-- Minimal CSS: Adobe-like clean red + white theme; responsive -->
-<style>
-  :root{
-    --brand-1:#dc2626; /* red */
-    --brand-2:#b91c1c;
-    --muted:#6b7280;
-    --container:1100px;
-  }
-  *{box-sizing:border-box}
-  body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:0; color:#111; background:#fff;}
-  a{color:inherit}
-  header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:linear-gradient(90deg,var(--brand-1),var(--brand-2));color:#fff;position:sticky;top:0;z-index:40}
-  .left-nav{display:flex;align-items:center;gap:18px}
-  .logo{font-weight:800;font-size:1.25rem;cursor:pointer}
-  .nav-links a{color:rgba(255,255,255,0.95);text-decoration:none;margin-left:12px;font-weight:600}
-  .nav-links a:hover{text-decoration:underline}
-  .right-nav{display:flex;align-items:center;gap:10px}
-  .btn{background:#fff;color:var(--brand-2);border:none;padding:9px 14px;border-radius:8px;font-weight:700;cursor:pointer}
-  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.18);color:#fff}
-  .container{max-width:var(--container);margin:28px auto;padding:0 18px}
-  .hero{display:flex;gap:30px;align-items:center;justify-content:space-between;padding:34px 20px;border-radius:16px;background:linear-gradient(180deg,#fff,#fff);box-shadow:0 10px 30px rgba(0,0,0,0.05)}
-  .hero-left{flex:1;min-width:300px}
-  .eyebrow{display:inline-block;padding:6px 10px;background:rgba(220,38,38,0.08);color:var(--brand-1);font-weight:700;border-radius:999px;font-size:12px;margin-bottom:14px}
-  .hero h1{font-size:28px;margin:0 0 12px;color:#0f172a}
-  .hero p.lead{color:var(--muted);line-height:1.6;margin:0 0 18px}
-  /* Upload UI */
-  .uploader{background:linear-gradient(180deg,#fff,#fff);border:1px solid #f3f4f6;padding:18px;border-radius:12px;display:flex;gap:18px;align-items:center}
-  .upload-area{flex:1;padding:18px;border-radius:10px;border:2px dashed #fdecea;text-align:center;background:linear-gradient(180deg,#fff,#fff)}
-  .upload-area.dragover{border-color:var(--brand-1);background:#fff7f7}
-  .upload-area input[type=file]{display:none}
-  .upload-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
-  .upload-preview{width:220px;height:220px;border-radius:10px;overflow:hidden;background:#f8fafc;display:flex;align-items:center;justify-content:center;border:1px solid #f3f4f6}
-  .upload-preview img{max-width:100%;max-height:100%;display:block}
-  .tool-card-grid{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
-  .small-card{background:#fff5f5;padding:14px;border-radius:10px;border:1px solid #ffefef;box-shadow:0 8px 20px rgba(185,28,28,0.06);min-width:220px;flex:1}
-  .small-card h3{margin:0 0 8px;color:var(--brand-2);font-size:16px}
-  .small-card p{margin:0;color:var(--muted);font-size:14px}
-  /* Right column hero image */
-  .hero-right{width:420px;max-width:45%;display:flex;flex-direction:column;gap:14px;align-items:flex-end}
-  .hero-graphic{width:420px;border-radius:14px;overflow:hidden;border:1px solid #f3f4f6}
-  .hero-graphic img{width:100%;display:block}
-  /* Sections */
-  section {margin-top:28px}
-  .steps{display:flex;gap:18px;flex-wrap:wrap}
-  .step{flex:1;min-width:220px;background:#fff;padding:18px;border-radius:12px;border:1px solid #f3f4f6}
-  .step h4{margin:6px 0;color:var(--brand-2)}
-  .testimonials{display:flex;gap:14px;flex-wrap:wrap}
-  .testimonial{background:#fff;padding:16px;border-radius:12px;border:1px solid #f3f4f6;flex:1;min-width:220px}
-  .faq{background:#fff;padding:18px;border-radius:12px;border:1px solid #f3f4f6}
-  /* Latest blogs + ads */
-  .ad-banner{background:#fff2f2;border:2px dashed #fca5a5;padding:18px;text-align:center;color:var(--brand-2);border-radius:10px;margin:22px 0}
-  .latest-blogs ul{list-style:none;padding:0;margin:0}
-  .latest-blogs li{margin:8px 0}
-  .see-more{display:inline-block;margin-top:12px;padding:10px 14px;background:var(--brand-1);color:#fff;border-radius:8px;text-decoration:none;font-weight:700}
-  /* footer small */
-  footer{padding:20px;text-align:center;color:var(--muted);font-size:14px;margin-top:28px}
-  /* responsive */
-  @media (max-width:980px){
-    .hero{flex-direction:column;align-items:stretch}
-    .hero-right{width:100%;max-width:100%;align-items:center}
-    .upload-preview{width:160px;height:160px}
-  }
-</style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF0000;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #FF0000;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #FF0000;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #E60000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FF0000;
+            border: 2px solid #FF0000;
+        }
+
+        .btn-secondary:hover {
+            background: #FF0000;
+            color: white;
+        }
+
+        .profile-btn {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFFFFF 100%);
+            padding: 4rem 0;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: #FF0000;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 3px dashed #FF0000;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            background: #FFF;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #E60000;
+            background: #FFFAFA;
+        }
+
+        .upload-area.dragover {
+            border-color: #E60000;
+            background: #FFEBEE;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #FF0000;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .file-types {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .features-text {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-card {
+            background: #FF0000;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            background: #E60000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255,0,0,0.3);
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Steps Section */
+        .steps {
+            padding: 4rem 0;
+            background: #F8F9FA;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            color: #FF0000;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            background: #FF0000;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: #F8F9FA;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #FF0000;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #FF0000;
+        }
+
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 4rem 0;
+            background: #F8F9FA;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* About & Terms Sections */
+        .about, .terms {
+            padding: 4rem 0;
+            background: #F8F9FA;
+        }
+
+        .terms {
+            background: white;
+        }
+
+        /* Blog Section */
+        .blogs {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-card {
+            background: #F8F9FA;
+            padding: 2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #FF0000;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .see-more {
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #FF0000;
+                cursor: pointer;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .steps-grid,
+            .testimonials-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Preview Styles */
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .preview-container {
+            text-align: center;
+        }
+
+        .remove-image {
+            background: #FF0000;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
 </head>
-<body>
-
-<!-- HEADER (kept as-is visually but restyled slightly to match) -->
-<header>
-  <div class="left-nav">
-    <div class="logo" onclick="window.scrollTo({top:document.querySelector('#about').offsetTop, behavior:'smooth'})">DaTools</div>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#about">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-    </nav>
-  </div>
-  <div class="right-nav">
-    <!-- Login/Register/Profile Buttons Redirect (behavior unchanged) -->
-    <button id="login-btn" class="btn" onclick="window.location.href='login.html'">Login</button>
-    <button id="register-btn" class="btn" onclick="window.location.href='register.html'">Register</button>
-    <button id="profile-btn" class="btn" style="display:none;" onclick="window.location.href='profile.html'">Profile</button>
-  </div>
-</header>
-
-<!-- MAIN CONTAINER -->
-<div class="container">
-
-  <!-- Top ad (kept) -->
-  <div class="ad-banner">Advertisement Space (728x90)</div>
-
-  <!-- HERO: left content (text + uploader) and right visual -->
-  <div class="hero" role="region" aria-label="Image background remover hero">
-    <div class="hero-left">
-      <div class="eyebrow">DaTools • Free</div>
-      <h1>Remove the background from your image for free.</h1>
-      <p class="lead">Easily remove the background from images quickly — upload a photo and get a transparent PNG. Continue editing after removal to add new backgrounds, graphics, or text.</p>
-
-      <!-- Upload UI (visual). NOTE: actual removal not performed here; Open tool button links to background-remover.html -->
-      <div class="uploader" aria-hidden="false">
-        <div style="flex:1">
-          <div id="uploadArea" class="upload-area" tabindex="0" aria-label="Upload image area">
-            <p style="font-weight:700;color:var(--brand-2)">Drag and drop an image</p>
-            <p style="color:var(--muted);margin:6px 0;font-size:14px">or <label for="fileInput" style="color:var(--brand-1);text-decoration:underline;cursor:pointer">browse to upload</label>.</p>
-            <p style="color:var(--muted);font-size:13px;margin-top:8px">File must be JPEG, JPG, PNG or WebP and up to 40MB</p>
-
-            <div class="upload-actions">
-              <input id="fileInput" type="file" accept="image/*" />
-              <button id="openToolBtn" class="btn" onclick="openTool()">Open Background Remover</button>
-              <button id="downloadPreviewBtn" class="btn secondary" onclick="downloadPreview()" title="Download preview (original image)">Download</button>
+<body id="top">
+    <!-- Header -->
+    <header class="header">
+        <nav class="container nav">
+            <a href="#top" class="logo">
+                <img src="logo.png" alt="datools.site logo">
+                <span class="logo-text">datools.site</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="#terms">Terms</a></li>
+            </ul>
+            
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-secondary">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+                <a href="profile.html" class="btn btn-primary profile-btn">Profile</a>
             </div>
-          </div>
+            
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
 
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">
-            <strong style="color:#111">Free to use</strong> • No credit card required. By uploading, you agree to our <a href="terms.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a>.
-          </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Remove the <span class="highlight">background</span> from your image for free.</h1>
+                    <p>Easily remove the background from images in Adobe Express-style tool. Continue editing your image to quickly change the background, add graphics, and more.</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <div class="upload-text">Drag & drop image or browse to upload</div>
+                        <div class="file-types">Accept JPEG, JPG, PNG, WebP up to 40MB</div>
+                        <input type="file" id="fileInput" accept=".jpeg,.jpg,.png,.webp" style="display: none;" multiple>
+                        <div class="preview-container">
+                            <img id="imagePreview" class="image-preview" alt="Preview">
+                            <button id="removeImage" class="remove-image">Remove Image</button>
+                        </div>
+                    </div>
+                    
+                    <div class="features-text">
+                        Free to use • No credit card required • Adobe Terms of Use & Privacy Policy
+                    </div>
+                    
+                    <a href="#about" class="tool-card">
+                        <h3>🎨 Background Remover Tool</h3>
+                        <p>Remove backgrounds instantly with AI</p>
+                    </a>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="attached_assets/stock_images/background_removal_t_655620c1.jpg" alt="Background removal tool interface">
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div style="width:240px;display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div class="upload-preview" id="previewBox" aria-hidden="true">
-            <span style="color:var(--muted);text-align:center;padding:12px">Your image preview will appear here</span>
-          </div>
-          <div style="width:100%;text-align:center">
-            <small style="color:var(--muted)">Output: Transparent PNG (after removal)</small>
-          </div>
+    <!-- Steps Section -->
+    <section class="steps">
+        <div class="container">
+            <h2 class="section-title">Remove Background in 3 Simple Steps</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🎯</div>
+                    <h3>Select</h3>
+                    <p>Upload your image by dragging and dropping or clicking to browse. Supports JPEG, PNG, WebP formats up to 40MB.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">✂️</div>
+                    <h3>Remove</h3>
+                    <p>Our AI automatically detects and removes the background from your image in seconds with precision and accuracy.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🎨</div>
+                    <h3>Continue Editing</h3>
+                    <p>Download your image with transparent background or continue editing to add new backgrounds, graphics, and effects.</p>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- small feature cards -->
-      <div class="tool-card-grid" style="margin-top:16px">
-        <div class="small-card">
-          <h3>Fast & Automatic</h3>
-          <p>Remove backgrounds in seconds — our UI connects to background tool (or your chosen API).</p>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "datools.site saved me hours of manual editing. The background removal is incredibly accurate and fast. Perfect for my e-commerce product photos!"
+                    </div>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-role">E-commerce Store Owner</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a graphic designer, I need quick and precise tools. This background remover delivers professional results instantly. Highly recommended!"
+                    </div>
+                    <div class="testimonial-author">Mike Chen</div>
+                    <div class="testimonial-role">Graphic Designer</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The free tool works better than many paid alternatives. Clean interface, fast processing, and excellent results every time."
+                    </div>
+                    <div class="testimonial-author">Emma Rodriguez</div>
+                    <div class="testimonial-role">Social Media Manager</div>
+                </div>
+            </div>
         </div>
-        <div class="small-card">
-          <h3>High Quality</h3>
-          <p>Preserves edges and details for clean cutouts and transparent PNG downloads.</p>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Background Removal Examples</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_791e138f.jpg" alt="Background removal example 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_20821c19.jpg" alt="Background removal example 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_31268ed8.jpg" alt="Background removal example 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_e68b8ddf.jpg" alt="Background removal example 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_b8d05bb4.jpg" alt="Background removal example 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_9a8d3d7b.jpg" alt="Background removal example 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_2a329c71.jpg" alt="Background removal example 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_69180e48.jpg" alt="Background removal example 8">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_c1ac5701.jpg" alt="Background removal example 9">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_4b674294.jpg" alt="Background removal example 10">
+                </div>
+            </div>
         </div>
-        <div class="small-card">
-          <h3>No Signup Required</h3>
-          <p>Use it quickly — registered users can track history, manage VIP features on their profile.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About datools.site</h2>
+            <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">datools.site is your go-to platform for professional image editing tools. Created by syed afnan sav, we provide free, easy-to-use tools that deliver professional results. Our AI-powered background removal tool helps photographers, designers, and content creators achieve perfect results in seconds.</p>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Right visual column (images to give Adobe-like feel) -->
-    <div class="hero-right" aria-hidden="true">
-      <div class="hero-graphic">
-        <!-- free stock collage-like image from Unsplash -->
-        <img alt="Background remover illustration" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3fb1f7c5a3a7d3b0b8b22951f3a0c997" />
-      </div>
-      <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid #f3f4f6;width:100%;text-align:center">
-        <strong style="color:var(--brand-2);display:block">Create transparent cutouts for any project</strong>
-        <small style="color:var(--muted)">Place your subject on new backgrounds, collages, social posts, banners and more.</small>
-      </div>
-    </div>
-  </div>
-
-  <!-- tools container (we keep only image background remover) -->
-  <div style="margin-top:20px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
-    <div style="flex:1;min-width:260px">
-      <div class="small-card" style="background:linear-gradient(180deg,#fff,#fff)">
-        <h3 style="margin-bottom:8px">Background Remover</h3>
-        <p style="color:var(--muted);margin-bottom:12px">Upload your photo and remove the background automatically in seconds.</p>
-        <!-- keep original link to your tool page (behavior unchanged) -->
-        <a href="background-remover.html" class="see-more" style="background:var(--brand-1);padding:8px 12px;border-radius:8px;color:#fff;text-decoration:none;display:inline-block">Use Tool</a>
-      </div>
-    </div>
-
-    <!-- Removed Video Background Remover card per request -->
-    <!-- placeholder to keep layout balanced -->
-    <div style="flex:1;min-width:260px;opacity:0.95">
-      <div class="small-card" style="background:#fff5f5;min-height:100px;display:flex;align-items:center;justify-content:center">
-        <div style="text-align:center;color:var(--brand-2)">
-          <strong>Only Image BG Remover</strong>
-          <div style="font-size:13px;color:var(--muted)">Video BG tool removed from homepage as requested</div>
+    <!-- Terms Section -->
+    <section id="terms" class="terms">
+        <div class="container">
+            <h2 class="section-title">Terms of Service</h2>
+            <div style="text-align: center; padding: 2rem; background: #F8F9FA; border-radius: 15px; margin-bottom: 2rem;">
+                <p style="color: #666; max-width: 800px; margin: 0 auto;">By using datools.site, you agree to our terms of service. Our tools are provided free of charge for personal and commercial use. We respect your privacy and do not store uploaded images. For detailed terms and conditions, please visit our dedicated terms page.</p>
+                <a href="#top" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Back to Top</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- ad banner -->
-  <div class="ad-banner" style="margin-top:18px">Advertisement Space (300x250)</div>
+    <!-- Latest Blogs Section -->
+    <section class="blogs">
+        <div class="container">
+            <h2 class="section-title">Latest From Our Blog</h2>
+            <div class="blog-grid">
+                <a href="https://datoolsblogs.blogspot.com/" class="blog-card">
+                    <div class="blog-title">10 Best Practices for Background Removal</div>
+                    <div class="blog-excerpt">Learn professional techniques and tips for achieving perfect background removal results every time.</div>
+                </a>
+                <a href="https://datoolsblogs.blogspot.com/" class="blog-card">
+                    <div class="blog-title">AI vs Manual Background Removal: Which is Better?</div>
+                    <div class="blog-excerpt">Compare the pros and cons of AI-powered and manual background removal methods for different use cases.</div>
+                </a>
+                <a href="https://datoolsblogs.blogspot.com/" class="blog-card">
+                    <div class="blog-title">How to Create Professional Product Photos</div>
+                    <div class="blog-excerpt">Step-by-step guide to creating stunning product photography using our background removal tools.</div>
+                </a>
+            </div>
+            <div class="see-more">
+                <a href="https://datoolsblogs.blogspot.com/" class="btn btn-primary">See More</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- About Section (kept content & links similar to original but expanded) -->
-  <section id="about" class="about-section">
-    <h2 style="color:var(--brand-2);margin:0 0 12px">About DaTools</h2>
-    <p style="color:var(--muted);max-width:880px">DaTools provides a fast, free and easy-to-use Image Background Remover. Remove image backgrounds for social posts, e-commerce shots, thumbnails and more. Our UI lets users preview uploads and open the full tool page to process and download transparent PNGs.</p>
-    <p style="color:var(--muted);max-width:880px">Registered users can track their history, manage memberships, and access additional premium tools via the profile page — existing site pages (Contact, Privacy, Terms) remain unchanged.</p>
-  </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear">2025</span> syed afnan sav — All rights reserved.</p>
+        </div>
+    </footer>
 
-  <!-- Steps -->
-  <section aria-label="How to remove background">
-    <h3 style="color:var(--brand-2);margin:8px 0">How to remove the background of a picture</h3>
-    <div class="steps">
-      <div class="step">
-        <strong>1. Select.</strong>
-        <h4>Choose an image</h4>
-        <p style="color:var(--muted)">For best results, pick a photo where the subject has clear edges and minimal overlap with background elements.</p>
-      </div>
-      <div class="step">
-        <strong>2. Remove.</strong>
-        <h4>Open the remover</h4>
-        <p style="color:var(--muted)">Click "Open Background Remover" to go to the processing page — the tool will automatically isolate and remove the background.</p>
-      </div>
-      <div class="step">
-        <strong>3. Continue editing.</strong>
-        <h4>Download & edit</h4>
-        <p style="color:var(--muted)">Download your image as a transparent PNG, or continue editing it in our editor to add backgrounds, text, and effects.</p>
-      </div>
-    </div>
-  </section>
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-  <!-- Testimonials -->
-  <section style="margin-top:20px">
-    <h3 style="color:var(--brand-2);margin:6px 0">See what people are saying</h3>
-    <div class="testimonials">
-      <div class="testimonial">
-        <strong>Shelly Kim</strong>
-        <div style="font-size:13px;color:var(--muted)">Owner @ Letters by Shells</div>
-        <p style="color:var(--muted);margin-top:8px">"I enjoy using the remove background feature during product launches! In just a few steps, I remove the original background and add a fun one with my product."</p>
-      </div>
+        // Image upload functionality
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const removeImageBtn = document.getElementById('removeImage');
 
-      <div class="testimonial">
-        <strong>Abs Ahlijah</strong>
-        <div style="font-size:13px;color:var(--muted)">Marketing & Content Coordinator @ Soul Session</div>
-        <p style="color:var(--muted);margin-top:8px">"The background remover saved me hours — it effortlessly removes backgrounds and refines edges with just a few clicks."</p>
-      </div>
+        // Click to upload
+        uploadArea.addEventListener('click', (e) => {
+            if (e.target !== removeImageBtn) {
+                fileInput.click();
+            }
+        });
 
-      <div class="testimonial">
-        <strong>Penuel Stanley-Zebulon</strong>
-        <div style="font-size:13px;color:var(--muted)">Student @ Pennsylvania State University</div>
-        <p style="color:var(--muted);margin-top:8px">"Perfect for quick edits — makes profile photos and project images look professional."</p>
-      </div>
-    </div>
-  </section>
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
 
-  <!-- Feature details / marketing -->
-  <section style="margin-top:22px;display:flex;gap:18px;flex-wrap:wrap">
-    <div style="flex:1;min-width:280px;">
-      <h3 style="color:var(--brand-2);margin:0 0 10px">Create transparent cutout backgrounds</h3>
-      <p style="color:var(--muted)">Highlight the subject and place it into new designs, posters, infographics, or social media templates. The downloaded PNG maintains transparency so you can layer it anywhere.</p>
-    </div>
-    <div style="flex:1;min-width:280px">
-      <h3 style="color:var(--brand-2);margin:0 0 10px">Do more with your image</h3>
-      <p style="color:var(--muted)">After removing the background, add shapes, filters, text, or GIFs to produce high-quality posts and graphics.</p>
-    </div>
-  </section>
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
 
-  <!-- Latest Blogs (kept original blog links) -->
-  <section class="latest-blogs" id="blogs">
-    <h3 style="color:var(--brand-2)">Latest Blogs</h3>
-    <ul>
-      <li><a href="https://datoolsblogs.blogspot.com/2025/09/how-to-compress-image.html" target="_blank">How to Compress Image</a></li>
-      <li><a href="https://datoolsblogs.blogspot.com/2025/09/how-to-remove-image-backgrounds-in.html" target="_blank">How to Remove Image Backgrounds</a></li>
-      <li><a href="https://datoolsblogs.blogspot.com/2025/09/apps-how-they-changed-our-digital-life.html" target="_blank">Apps: How They Changed Our Digital Life</a></li>
-    </ul>
-    <a href="https://datoolsblogs.blogspot.com/" class="see-more" target="_blank">See More</a>
-  </section>
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
 
-  <!-- bottom ad -->
-  <div class="ad-banner">Advertisement Space (728x90)</div>
-</div>
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
 
-<footer>
-  © <span id="year"></span> DaTools — All rights reserved.
-</footer>
+        // Handle file upload
+        function handleFileUpload(file) {
+            // Check file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Please upload a valid image file (JPEG, JPG, PNG, WebP)');
+                return;
+            }
 
-<!-- keep firebase/auth script reference unchanged -->
-<script type="module" src="auth.js"></script>
+            // Check file size (40MB limit)
+            if (file.size > 40 * 1024 * 1024) {
+                alert('File size must be less than 40MB');
+                return;
+            }
 
-<!-- Small JS: drag-drop preview + buttons -->
-<script>
-  // year
-  document.getElementById('year').textContent = new Date().getFullYear();
+            // Create preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                removeImageBtn.style.display = 'inline-block';
+            };
+            reader.readAsDataURL(file);
+        }
 
-  const fileInput = document.getElementById('fileInput');
-  const previewBox = document.getElementById('previewBox');
-  const uploadArea = document.getElementById('uploadArea');
+        // Remove image
+        removeImageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            imagePreview.style.display = 'none';
+            removeImageBtn.style.display = 'none';
+            fileInput.value = '';
+        });
 
-  // helper: show preview
-  function showPreview(file){
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e){
-      previewBox.innerHTML = '<img src="'+e.target.result+'" alt="preview" />';
-      previewBox.setAttribute('aria-hidden','false');
-    }
-    reader.readAsDataURL(file);
-  }
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const hash = this.getAttribute('href');
+                if (!hash || hash === '#' || hash.length < 2) return;
+                
+                e.preventDefault();
+                const target = document.querySelector(hash);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-  fileInput.addEventListener('change', (e)=>{
-    const f = e.target.files[0];
-    if(f) showPreview(f);
-  });
+        // Mobile menu toggle (basic implementation)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
 
-  // drag & drop visuals (no upload performed)
-  ['dragenter','dragover'].forEach(ev=>{
-    uploadArea.addEventListener(ev, (e)=>{
-      e.preventDefault(); e.stopPropagation();
-      uploadArea.classList.add('dragover');
-    });
-  });
-  ['dragleave','drop'].forEach(ev=>{
-    uploadArea.addEventListener(ev, (e)=>{
-      e.preventDefault(); e.stopPropagation();
-      uploadArea.classList.remove('dragover');
-    });
-  });
-  uploadArea.addEventListener('drop', (e)=>{
-    const dt = e.dataTransfer;
-    if(dt && dt.files && dt.files.length) {
-      const f = dt.files[0];
-      // set to input so user can still use it
-      fileInput.files = dt.files;
-      showPreview(f);
-    }
-  });
+        mobileMenu.addEventListener('click', () => {
+            const isVisible = navLinks.style.display === 'flex';
+            navLinks.style.display = isVisible ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            navLinks.style.padding = '1rem';
+            mobileMenu.setAttribute('aria-expanded', !isVisible);
+        });
 
-  // Open tool button: redirect to your background-remover page (preserve original workflow)
-  function openTool(){
-    // If a file is selected, we can't reliably pass it via GET. So we simply open the tool page.
-    // You can later integrate direct upload-to-tool (via form post or API) if desired.
-    window.location.href = 'background-remover.html';
-  }
+        // Gallery hover effects
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
 
-  // Download preview (downloads the original uploaded file preview if available)
-  function downloadPreview(){
-    const img = previewBox.querySelector('img');
-    if(!img){ alert('No preview available to download. Please upload an image first.'); return; }
-    // create a link and download dataURL (this will be the original file data)
-    const link = document.createElement('a');
-    link.href = img.src;
-    link.download = 'datools-preview.png';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  }
-</script>
-
+        // Add loading animation for tool card
+        document.querySelector('.tool-card').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.style.opacity = '0.7';
+            this.innerHTML = '<h3>🔄 Coming Soon!</h3><p>Background remover tool is being developed</p>';
+            
+            setTimeout(() => {
+                this.style.opacity = '1';
+                this.innerHTML = '<h3>🎨 Background Remover Tool</h3><p>Remove backgrounds instantly with AI</p>';
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
