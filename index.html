@@ -691,83 +691,63 @@
         </div>
     </footer>
 
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    // Handle file upload
+function handleFileUpload(file) {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+        alert('Please upload a valid image file (JPEG, JPG, PNG, WebP)');
+        return;
+    }
 
-        // Image upload functionality
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const imagePreview = document.getElementById('imagePreview');
-        const removeImageBtn = document.getElementById('removeImage');
+    if (file.size > 40 * 1024 * 1024) {
+        alert('File size must be less than 40MB');
+        return;
+    }
 
-        // Click to upload
-        uploadArea.addEventListener('click', (e) => {
-            if (e.target !== removeImageBtn) {
-                fileInput.click();
-            }
-        });
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+        removeImageBtn.style.display = 'inline-block';
 
-        // Drag and drop functionality
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
+        // 🔥 Send to API (Cloudflare Worker)
+        try {
+            const formData = new FormData();
+            formData.append("image", file);
 
-        uploadArea.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-        });
+            const res = await fetch("https://syedirfan56g.workers.dev/bg-remover", {
+                method: "POST",
+                body: formData
+            });
 
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFileUpload(files[0]);
-            }
-        });
-
-        // File input change
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileUpload(e.target.files[0]);
-            }
-        });
-
-        // Handle file upload
-        function handleFileUpload(file) {
-            // Check file type
-            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-            if (!allowedTypes.includes(file.type)) {
-                alert('Please upload a valid image file (JPEG, JPG, PNG, WebP)');
-                return;
+            if (!res.ok) {
+                throw new Error("API request failed");
             }
 
-            // Check file size (40MB limit)
-            if (file.size > 40 * 1024 * 1024) {
-                alert('File size must be less than 40MB');
-                return;
-            }
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
 
-            // Create preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-                removeImageBtn.style.display = 'inline-block';
-            };
-            reader.readAsDataURL(file);
+            // Show processed image instead of original
+            imagePreview.src = url;
+
+            // Optional: auto-download
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "background-removed.png";
+            link.textContent = "⬇️ Download Image";
+            link.style.display = "block";
+            link.style.marginTop = "1rem";
+            document.querySelector(".preview-container").appendChild(link);
+
+        } catch (err) {
+            console.error(err);
+            alert("Failed to process image. Please try again.");
         }
+    };
+    reader.readAsDataURL(file);
+}
 
-        // Remove image
-        removeImageBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            imagePreview.style.display = 'none';
-            removeImageBtn.style.display = 'none';
-            fileInput.value = '';
-        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
