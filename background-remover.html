@@ -3,205 +3,590 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Remover - DaTools</title>
-    <meta name="description" content="Remove image backgrounds instantly with AI. Free online background remover tool. No registration required.">
-    <meta name="keywords" content="background remover, remove background, AI background removal, transparent background">
-    <meta name="author" content="DaTools">
+    <meta name="description" content="Professional background removal tool - Remove backgrounds from images instantly with AI-powered technology. Free and easy to use.">
+    <title>Background Remover - datools.site</title>
     <link rel="canonical" href="https://datools.site/background-remover.html">
-
-    <!-- Website Favicons -->
-  <link rel="icon" type="image/png" sizes="16x16" href="datools logo/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="datools logo/favicon-16x16.png">
-  <link rel="apple-touch-icon" href="datools logo/favicon-16x16.png">
-  <link rel="shortcut icon" href="datools logo/favicon-16x16.png" type="image/png">
-
+    
     <style>
-        /* ---- Styling (same as aapne diya tha) ---- */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Segoe UI',sans-serif; line-height:1.6; color:#333;
-               background:linear-gradient(135deg,#fff 0%,#f8f8f8 100%); min-height:100vh;}
-        .container{max-width:1200px;margin:0 auto;padding:0 20px;}
-        header{background:linear-gradient(135deg,#dc2626 0%,#b91c1c 100%);color:#fff;
-               padding:1rem 0;box-shadow:0 2px 10px rgba(220,38,38,.2);}
-        .header-content{display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-size:1.5rem;font-weight:bold;text-decoration:none;color:#fff;display:flex;align-items:center;gap:10px;}
-        .logo::before{content:"🔧";font-size:1.2rem;}
-        .back-btn{background:rgba(255,255,255,.2);color:#fff;padding:.5rem 1rem;border-radius:5px;text-decoration:none;}
-        .back-btn:hover{background:rgba(255,255,255,.3);}
-        .tool-header{background:#fff;padding:2rem 0;text-align:center;border-bottom:2px solid #f3f4f6;}
-        .tool-header h1{color:#dc2626;font-size:2.5rem;margin-bottom:1rem;font-weight:bold;}
-        .ad-banner{background:#f3f4f6;border:2px dashed #d1d5db;padding:1rem;margin:1rem 0;text-align:center;color:#9ca3af;}
-        .tool-container{padding:3rem 0;min-height:60vh;}
-        .tool-wrapper{background:#fff;border-radius:15px;padding:2rem;box-shadow:0 10px 30px rgba(0,0,0,.1);}
-        .upload-area{border:3px dashed #dc2626;border-radius:10px;padding:3rem 2rem;text-align:center;
-                     margin-bottom:2rem;cursor:pointer;background:#fef2f2;}
-        .upload-area:hover{border-color:#b91c1c;background:#fef1f1;}
-        .upload-icon{font-size:4rem;color:#dc2626;margin-bottom:1rem;}
-        .upload-text{font-size:1.2rem;font-weight:600;color:#dc2626;margin-bottom:.5rem;}
-        #file-input{display:none;}
-        .upload-btn{background:#dc2626;color:#fff;padding:.8rem 2rem;border:none;border-radius:50px;cursor:pointer;margin-top:1rem;}
-        .processing-area{display:none;text-align:center;padding:2rem;}
-        .loading-spinner{width:50px;height:50px;border:4px solid #f3f4f6;border-top:4px solid #dc2626;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1rem;}
-        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-        .result-area{display:none;}
-        .image-comparison{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;}
-        .image-container{text-align:center;}
-        .image-preview{max-width:100%;max-height:300px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.1);}
-        .download-btn,.new-image-btn{padding:1rem 2rem;border:none;border-radius:50px;font-weight:600;cursor:pointer;margin:1rem .5rem;display:inline-block;text-decoration:none;}
-        .download-btn{background:#10b981;color:#fff;}
-        .new-image-btn{background:#dc2626;color:#fff;}
-        .error-message{background:#fee2e2;color:#dc2626;padding:1rem;border-radius:8px;margin-bottom:1rem;display:none;}
-        footer{background:#1f2937;color:#fff;text-align:center;padding:2rem 0;margin-top:3rem;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #F8F9FA;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF0000;
+        }
+
+        .back-btn {
+            background: #FF0000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #E60000;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 2rem 0;
+        }
+
+        .tool-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-title h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .tool-title .highlight {
+            color: #FF0000;
+        }
+
+        .tool-title p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Tool Interface */
+        .tool-interface {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .upload-section {
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 3px dashed #FF0000;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            background: #FFFAFA;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: #E60000;
+            background: #FFEBEE;
+        }
+
+        .upload-area.dragover {
+            border-color: #E60000;
+            background: #FFEBEE;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #FF0000;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-subtext {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Preview Section */
+        .preview-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .preview-card {
+            background: #F8F9FA;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .preview-card h3 {
+            color: #FF0000;
+            margin-bottom: 1rem;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FF0000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #FF0000;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #E60000;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FF0000;
+            border: 2px solid #FF0000;
+        }
+
+        .btn-secondary:hover {
+            background: #FF0000;
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Error Messages */
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #FF0000;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .preview-section {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tool-title h1 {
+                font-size: 2rem;
+            }
+
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-<header>
-    <div class="container">
-        <div class="header-content">
-            <a href="index.html" class="logo">DaTools</a>
-            <a href="index.html" class="back-btn">← Back to Tools</a>
-        </div>
-    </div>
-</header>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container nav">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="datools.site logo">
+                <span class="logo-text">datools.site</span>
+            </a>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </nav>
+    </header>
 
-<section class="tool-header">
-    <div class="container">
-        <h1>Background Remover</h1>
-        <p>Remove image backgrounds instantly with AI. Perfect for product photos, portraits, and graphics.</p>
-    </div>
-</section>
-
-<main class="tool-container">
-    <div class="container">
-        <div class="ad-banner">Advertisement Space - 728x90</div>
-
-        <div class="tool-wrapper">
-            <div class="error-message" id="error-message"></div>
-
-            <!-- Upload Area -->
-            <div class="upload-area" id="upload-area">
-                <div class="upload-icon">📸</div>
-                <div class="upload-text">Click to upload or drag and drop</div>
-                <div class="upload-subtext">Supports JPG, PNG, WEBP (Max 5MB)</div>
-                <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.webp" />
-                <button class="upload-btn" onclick="document.getElementById('file-input').click()">Choose Image</button>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Tool Title -->
+            <div class="tool-title">
+                <h1><span class="highlight">AI-Powered</span> Background Remover</h1>
+                <p>Remove backgrounds from your images instantly with professional results</p>
             </div>
 
-            <!-- Processing Area -->
-            <div class="processing-area" id="processing-area">
-                <div class="loading-spinner"></div>
-                <div class="processing-text">Removing background... Please wait</div>
-            </div>
-
-            <!-- Result Area -->
-            <div class="result-area" id="result-area">
-                <div class="image-comparison">
-                    <div class="image-container">
-                        <h3>Original</h3>
-                        <img id="original-image" class="image-preview" alt="Original image" />
-                    </div>
-                    <div class="image-container">
-                        <h3>Background Removed</h3>
-                        <img id="result-image" class="image-preview" alt="Background removed" />
+            <!-- Tool Interface -->
+            <div class="tool-interface">
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">🖼️</div>
+                        <div class="upload-text">Drop your image here or click to browse</div>
+                        <div class="upload-subtext">Supports JPEG, PNG, WebP • Max 40MB • High quality results</div>
+                        <input type="file" id="fileInput" class="file-input" accept=".jpg,.jpeg,.png,.webp" multiple>
                     </div>
                 </div>
-                <div style="text-align:center;">
-                    <a id="download-link" class="download-btn" download="background-removed.png">📥 Download Image</a>
-                    <button class="new-image-btn" onclick="resetTool()">🔄 Remove Another</button>
+
+                <!-- Error/Success Messages -->
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Processing your image with AI...</p>
+                </div>
+
+                <!-- Preview Section -->
+                <div id="previewSection" class="preview-section">
+                    <div class="preview-card">
+                        <h3>🖼️ Original</h3>
+                        <img id="originalImage" class="preview-image" alt="Original image">
+                    </div>
+                    <div class="preview-card">
+                        <h3>✨ Background Removed</h3>
+                        <img id="processedImage" class="preview-image" alt="Processed image">
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="processBtn" class="btn btn-primary" disabled>
+                        🔥 Remove Background
+                    </button>
+                    <button id="downloadBtn" class="btn btn-secondary" disabled>
+                        📥 Download Result
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary">
+                        🔄 Start Over
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process images in seconds with advanced AI technology</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Precise Results</h3>
+                    <p>Smart edge detection for perfect background removal</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your images are processed securely and not stored</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Completely Free</h3>
+                    <p>No watermarks, no limits, no credit card required</p>
                 </div>
             </div>
         </div>
-        <div class="ad-banner">Advertisement Space - 728x90</div>
-    </div>
-</main>
+    </main>
 
-<footer>
-    <div class="container"><p>&copy; 2025 DaTools. All rights reserved.</p></div>
-</footer>
+    <script>
+        // Global variables
+        let selectedFile = null;
+        let processedImageBlob = null;
 
-<script>
-const API_KEY = "ujSzwBJkAr3oDvQbKokesoC2";
-const API_URL = "https://api.remove.bg/v1.0/removebg";
+        // DOM elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const previewSection = document.getElementById('previewSection');
+        const originalImage = document.getElementById('originalImage');
+        const processedImage = document.getElementById('processedImage');
+        const processBtn = document.getElementById('processBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
 
-const fileInput = document.getElementById("file-input");
-const uploadArea = document.getElementById("upload-area");
-const processingArea = document.getElementById("processing-area");
-const resultArea = document.getElementById("result-area");
-const errorMessage = document.getElementById("error-message");
-const originalImage = document.getElementById("original-image");
-const resultImage = document.getElementById("result-image");
-const downloadLink = document.getElementById("download-link");
+        // Upload area interactions
+        uploadArea.addEventListener('click', () => fileInput.click());
 
-// Drag & drop
-uploadArea.addEventListener("dragover", e => { e.preventDefault(); uploadArea.classList.add("dragover"); });
-uploadArea.addEventListener("dragleave", () => uploadArea.classList.remove("dragover"));
-uploadArea.addEventListener("drop", e => {
-    e.preventDefault();
-    uploadArea.classList.remove("dragover");
-    if (e.dataTransfer.files.length > 0) handleFileSelect(e.dataTransfer.files[0]);
-});
-fileInput.addEventListener("change", e => {
-    if (e.target.files.length > 0) handleFileSelect(e.target.files[0]);
-});
-
-function showError(msg){
-    errorMessage.textContent = msg;
-    errorMessage.style.display = "block";
-    setTimeout(()=>errorMessage.style.display="none",5000);
-}
-function validateFile(file){
-    const allowed = ["image/jpeg","image/jpg","image/png","image/webp"];
-    if(!allowed.includes(file.type)) return "Invalid file type (JPG, PNG, WEBP only)";
-    if(file.size > 5*1024*1024) return "File size must be <5MB";
-    return null;
-}
-
-async function handleFileSelect(file){
-    const err = validateFile(file);
-    if(err){ showError(err); return; }
-
-    // Show original
-    const reader = new FileReader();
-    reader.onload = e => { originalImage.src = e.target.result; };
-    reader.readAsDataURL(file);
-
-    uploadArea.style.display="none";
-    processingArea.style.display="block";
-    resultArea.style.display="none";
-
-    const formData = new FormData();
-    formData.append("image_file", file);
-
-    try{
-        const res = await fetch(API_URL, {
-            method:"POST",
-            headers:{ "X-Api-Key": API_KEY },
-            body: formData
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
         });
-        if(!res.ok) throw new Error("API request failed ("+res.status+")");
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
 
-        resultImage.src = url;
-        downloadLink.href = url;
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
 
-        processingArea.style.display="none";
-        resultArea.style.display="block";
-    }catch(e){
-        processingArea.style.display="none";
-        uploadArea.style.display="block";
-        showError(e.message);
-    }
-}
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect(files[0]);
+            }
+        });
 
-function resetTool(){
-    fileInput.value="";
-    uploadArea.style.display="block";
-    processingArea.style.display="none";
-    resultArea.style.display="none";
-    originalImage.src="";
-    resultImage.src="";
-}
-</script>
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        // File selection handler
+        function handleFileSelect(file) {
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                showError('Please select a valid image file (JPEG, PNG, WebP)');
+                return;
+            }
+
+            // Validate file size (40MB limit)
+            if (file.size > 40 * 1024 * 1024) {
+                showError('File size must be less than 40MB');
+                return;
+            }
+
+            selectedFile = file;
+            
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImage.src = e.target.result;
+                previewSection.style.display = 'grid';
+                processBtn.disabled = false;
+                processedImage.style.display = 'none';
+                downloadBtn.disabled = true;
+                hideMessages();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Process button handler
+        processBtn.addEventListener('click', async () => {
+            if (!selectedFile) {
+                showError('Please select an image first');
+                return;
+            }
+
+            try {
+                showLoading(true);
+                processBtn.disabled = true;
+                hideMessages();
+
+                const formData = new FormData();
+                formData.append('image', selectedFile);
+
+                const response = await fetch('/api/remove-background', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                
+                // Create object URL for the processed image
+                const imageUrl = URL.createObjectURL(blob);
+                processedImage.src = imageUrl;
+                processedImage.style.display = 'block';
+                
+                // Store blob for download
+                processedImageBlob = blob;
+                downloadBtn.disabled = false;
+                
+                showSuccess('Background removed successfully! 🎉');
+
+            } catch (error) {
+                console.error('Error processing image:', error);
+                showError('Failed to process image. Please try again.');
+            } finally {
+                showLoading(false);
+                processBtn.disabled = false;
+            }
+        });
+
+        // Download button handler
+        downloadBtn.addEventListener('click', () => {
+            if (!processedImageBlob) {
+                showError('No processed image available for download');
+                return;
+            }
+
+            const url = URL.createObjectURL(processedImageBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `background-removed-${Date.now()}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showSuccess('Image downloaded successfully! 📥');
+        });
+
+        // Reset button handler
+        resetBtn.addEventListener('click', () => {
+            selectedFile = null;
+            processedImageBlob = null;
+            fileInput.value = '';
+            previewSection.style.display = 'none';
+            processBtn.disabled = true;
+            downloadBtn.disabled = true;
+            hideMessages();
+            showLoading(false);
+        });
+
+        // Utility functions
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        function showLoading(show) {
+            loadingSpinner.style.display = show ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
