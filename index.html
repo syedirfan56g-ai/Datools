@@ -762,13 +762,14 @@
             const formData = new FormData();
             formData.append("image", file);
 
-            const res = await fetch("https://syedirfan56g.workers.dev/bg-remover", {
-                method: "POST",
-                headers: {
-                    "X-Api-Key": "MKygiYdYxCxLAUo4bZF4YiS1"
-                },
-                body: formData
-            });
+            const res = await fetch("https://api.remove.bg/v1.0/removebg", {
+  method: "POST",
+  headers: {
+    "X-Api-Key": "MKygiYdYxCxLAUo4bZF4YiS1"
+  },
+  body: formData
+});
+
 
             if (!res.ok) throw new Error("API request failed");
 
