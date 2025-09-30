@@ -1,174 +1,226 @@
-<script>
-    // Set current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Remove the background from your image for free with datools.site. Easy-to-use background removal tool similar to Adobe Express. No credit card required.">
+    <meta name="keywords" content="background remover, image editing, photo editing, free tools, adobe express alternative">
+    <meta name="author" content="syed afnan sav">
+    <title>datools.site - Free Background Remover Tool</title>
+    <link rel="canonical" href="https://datools.site">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+    <!-- Header -->
+    <header class="header">
+        <nav class="container nav">
+            <a href="#top" class="logo">
+                <img src="logo.png" alt="datools.site logo">
+                <span class="logo-text">datools.site</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="#terms">Terms</a></li>
+            </ul>
+            
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-secondary">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+                <a href="profile.html" class="btn btn-primary profile-btn">Profile</a>
+            </div>
+            
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
 
-    // Image upload functionality
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput = document.getElementById('fileInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const removeImageBtn = document.getElementById('removeImage');
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Remove the <span class="highlight">background</span> from your image for free.</h1>
+                    <p>Easily remove the background from images in Adobe Express-style tool. Continue editing your image to quickly change the background, add graphics, and more.</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <div class="upload-text">Drag & drop image or browse to upload</div>
+                        <div class="file-types">Accept JPEG, JPG, PNG, WebP up to 40MB</div>
+                        <input type="file" id="fileInput" accept=".jpeg,.jpg,.png,.webp" style="display: none;" multiple>
+                        <div class="preview-container">
+                            <img id="imagePreview" class="image-preview" alt="Preview">
+                            <button id="removeImage" class="remove-image">Remove Image</button>
+                        </div>
+                    </div>
+                    
+                    <div class="features-text">
+                        Free to use • No credit card required • Adobe Terms of Use & Privacy Policy
+                    </div>
+                    
+                    <a href="background-remover.html" class="tool-card">
+                        <h3>🎨 Background Remover Tool</h3>
+                        <p>Remove backgrounds instantly with AI</p>
+                    </a>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="attached_assets/stock_images/background_removal_t_655620c1.jpg" alt="Background removal tool interface">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Click to upload
-    uploadArea.addEventListener('click', (e) => {
-        if (e.target !== removeImageBtn) {
-            fileInput.click();
-        }
-    });
+    <!-- Steps Section -->
+    <section class="steps">
+        <div class="container">
+            <h2 class="section-title">Remove Background in 3 Simple Steps</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🎯</div>
+                    <h3>Select</h3>
+                    <p>Upload your image by dragging and dropping or clicking to browse. Supports JPEG, PNG, WebP formats up to 40MB.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">✂️</div>
+                    <h3>Remove</h3>
+                    <p>Our AI automatically detects and removes the background from your image in seconds with precision and accuracy.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🎨</div>
+                    <h3>Continue Editing</h3>
+                    <p>Download your image with transparent background or continue editing to add new backgrounds, graphics, and effects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Drag and drop functionality
-    uploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadArea.classList.add('dragover');
-    });
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "datools.site saved me hours of manual editing. The background removal is incredibly accurate and fast. Perfect for my e-commerce product photos!"
+                    </div>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-role">E-commerce Store Owner</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a graphic designer, I need quick and precise tools. This background remover delivers professional results instantly. Highly recommended!"
+                    </div>
+                    <div class="testimonial-author">Mike Chen</div>
+                    <div class="testimonial-role">Graphic Designer</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The free tool works better than many paid alternatives. Clean interface, fast processing, and excellent results every time."
+                    </div>
+                    <div class="testimonial-author">Emma Rodriguez</div>
+                    <div class="testimonial-role">Social Media Manager</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    uploadArea.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-    });
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Background Removal Examples</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_791e138f.jpg" alt="Background removal example 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_20821c19.jpg" alt="Background removal example 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_31268ed8.jpg" alt="Background removal example 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_e68b8ddf.jpg" alt="Background removal example 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_b8d05bb4.jpg" alt="Background removal example 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_9a8d3d7b.jpg" alt="Background removal example 6">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_2a329c71.jpg" alt="Background removal example 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_69180e48.jpg" alt="Background removal example 8">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_c1ac5701.jpg" alt="Background removal example 9">
+                </div>
+                <div class="gallery-item">
+                    <img src="attached_assets/stock_images/before_and_after_bac_4b674294.jpg" alt="Background removal example 10">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    uploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-        if (e.dataTransfer.files.length > 0) {
-            handleFileUpload(e.dataTransfer.files[0]);
-        }
-    });
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About datools.site</h2>
+            <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">datools.site is your go-to platform for professional image editing tools. Created by syed afnan sav, we provide free, easy-to-use tools that deliver professional results. Our AI-powered background removal tool helps photographers, designers, and content creators achieve perfect results in seconds.</p>
+            </div>
+        </div>
+    </section>
 
-    // File input change
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            handleFileUpload(e.target.files[0]);
-        }
-    });
+    <!-- Terms Section -->
+    <section id="terms" class="terms">
+        <div class="container">
+            <h2 class="section-title">Terms of Service</h2>
+            <div style="text-align: center; padding: 2rem; background: #F8F9FA; border-radius: 15px; margin-bottom: 2rem;">
+                <p style="color: #666; max-width: 800px; margin: 0 auto;">By using datools.site, you agree to our terms of service. Our tools are provided free of charge for personal and commercial use. We respect your privacy and do not store uploaded images. For detailed terms and conditions, please visit our dedicated terms page.</p>
+                <a href="#top" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Back to Top</a>
+            </div>
+        </div>
+    </section>
 
-    // Handle file upload + API call
-    async function handleFileUpload(file) {
-        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-        if (!allowedTypes.includes(file.type)) {
-            alert('Please upload a valid image file (JPEG, JPG, PNG, WebP)');
-            return;
-        }
-        if (file.size > 40 * 1024 * 1024) {
-            alert('File size must be less than 40MB');
-            return;
-        }
+    <!-- Latest Blogs Section -->
+    <section class="blogs">
+        <div class="container">
+            <h2 class="section-title">Latest From Our Blog</h2>
+            <div class="blog-grid">
+                <a href="https://datoolsblogs.blogspot.com/" class="blog-card">
+                    <div class="blog-title">10 Best Practices for Background Removal</div>
+                    <div class="blog-excerpt">Learn professional techniques and tips for achieving perfect background removal results every time.</div>
+                </a>
+                <a href="https://datoolsblogs.blogspot.com/" class="blog-card">
+                    <div class="blog-title">AI vs Manual Background Removal: Which is Better?</div>
+                    <div class="blog-excerpt">Compare the pros and cons of AI-powered and manual background removal methods for different use cases.</div>
+                </a>
+                <a href="https://datoolsblogs.blogspot.com/" class="blog-card">
+                    <div class="blog-title">How to Create Professional Product Photos</div>
+                    <div class="blog-excerpt">Step-by-step guide to creating stunning product photography using our background removal tools.</div>
+                </a>
+            </div>
+            <div class="see-more">
+                <a href="https://datoolsblogs.blogspot.com/" class="btn btn-primary">See More</a>
+            </div>
+        </div>
+    </section>
 
-        // Show loading
-        imagePreview.src = "";
-        imagePreview.style.display = 'block';
-        imagePreview.alt = "Processing... Please wait ⏳";
-        removeImageBtn.style.display = 'none';
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear">2025</span> syed afnan sav — All rights reserved.</p>
+        </div>
+    </footer>
 
-        try {
-            const formData = new FormData();
-            formData.append("image_file", file);
-
-            const res = await fetch("https://api.remove.bg/v1.0/removebg", {
-                method: "POST",
-                headers: { "X-Api-Key": "MKygiYdYxCxLAUo4bZF4YiS1" },
-                body: formData
-            });
-
-            if (!res.ok) throw new Error("API request failed");
-
-            // Convert response to blob
-            const blob = await res.blob();
-            const url = URL.createObjectURL(blob);
-
-            // Show processed image
-            imagePreview.src = url;
-            imagePreview.alt = "Background removed ✅";
-            removeImageBtn.style.display = "inline-block";
-
-            // Add or update download button
-            let downloadBtn = document.getElementById("downloadBtn");
-            if (!downloadBtn) {
-                downloadBtn = document.createElement("a");
-                downloadBtn.id = "downloadBtn";
-                downloadBtn.download = "background-removed.png";
-                downloadBtn.textContent = "⬇️ Download Image";
-                downloadBtn.style.cssText = `
-                    display:inline-block;
-                    margin-top:1rem;
-                    background:#e63946;
-                    color:#fff;
-                    padding:10px 20px;
-                    border-radius:6px;
-                    text-decoration:none;
-                `;
-                document.querySelector(".preview-container").appendChild(downloadBtn);
-            }
-            downloadBtn.href = url;
-
-        } catch (err) {
-            console.error(err);
-            alert("❌ Failed to process image. Please try again.");
-
-            // Reset UI
-            imagePreview.style.display = "none";
-            removeImageBtn.style.display = "none";
-            fileInput.value = "";
-            const downloadBtn = document.getElementById("downloadBtn");
-            if (downloadBtn) downloadBtn.remove();
-        }
-    }
-
-    // Remove image
-    removeImageBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        imagePreview.src = "";
-        imagePreview.style.display = "none";
-        removeImageBtn.style.display = "none";
-        fileInput.value = "";
-        const downloadBtn = document.getElementById("downloadBtn");
-        if (downloadBtn) downloadBtn.remove();
-    });
-
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const hash = this.getAttribute('href');
-            if (!hash || hash === '#' || hash.length < 2) return;
-            e.preventDefault();
-            const target = document.querySelector(hash);
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // Mobile menu toggle
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-    mobileMenu.addEventListener('click', () => {
-        const isVisible = navLinks.style.display === 'flex';
-        navLinks.style.display = isVisible ? 'none' : 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '100%';
-        navLinks.style.left = '0';
-        navLinks.style.right = '0';
-        navLinks.style.background = 'white';
-        navLinks.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-        navLinks.style.padding = '1rem';
-        mobileMenu.setAttribute('aria-expanded', !isVisible);
-    });
-
-    // Gallery hover effects
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-        });
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-
-    // Tool card loading animation
-    document.querySelector('.tool-card').addEventListener('click', function(e) {
-        e.preventDefault();
-        this.style.opacity = '0.7';
-        this.innerHTML = '<h3>🔄 Loading Background Remover...</h3>';
-        setTimeout(() => {
-            window.location.href = 'background-remover.html';
-        }, 1000);
-    });
-</script>
+    <script src="script.js"></script>
+</body>
+</html>
