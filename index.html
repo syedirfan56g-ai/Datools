@@ -771,43 +771,66 @@
 });
 
 
-            if (!res.ok) throw new Error("API request failed");
+          if (!res.ok) throw new Error("API request failed");
 
-            const blob = await res.blob();
-            const url = URL.createObjectURL(blob);
+// Show loading text (optional)
+imagePreview.alt = "Processing... Please wait";
 
-            // Replace preview with processed image
-            imagePreview.src = url;
+// Convert response to blob
+const blob = await res.blob();
+const url = URL.createObjectURL(blob);
 
-            // Add download button
-            let downloadBtn = document.getElementById("downloadBtn");
-            if (!downloadBtn) {
-                downloadBtn = document.createElement("a");
-                downloadBtn.id = "downloadBtn";
-                downloadBtn.href = url;
-                downloadBtn.download = "background-removed.png";
-                downloadBtn.textContent = "⬇️ Download Image";
-                downloadBtn.style.display = "block";
-                downloadBtn.style.marginTop = "1rem";
-                document.querySelector(".preview-container").appendChild(downloadBtn);
-            } else {
-                downloadBtn.href = url;
-            }
-        } catch (err) {
-            console.error(err);
-            alert("Failed to process image. Please try again.");
-        }
-    }
+// Replace preview with processed image
+imagePreview.src = url;
+imagePreview.style.display = "block";
+imagePreview.alt = "Background removed";
 
-    // Remove image
-    removeImageBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        imagePreview.style.display = 'none';
-        removeImageBtn.style.display = 'none';
-        fileInput.value = '';
-        const downloadBtn = document.getElementById("downloadBtn");
-        if (downloadBtn) downloadBtn.remove();
-    });
+// Add download button
+let downloadBtn = document.getElementById("downloadBtn");
+if (!downloadBtn) {
+    downloadBtn = document.createElement("a");
+    downloadBtn.id = "downloadBtn";
+    downloadBtn.href = url;
+    downloadBtn.download = "background-removed.png";
+    downloadBtn.textContent = "⬇️ Download Image";
+    downloadBtn.style.display = "inline-block";
+    downloadBtn.style.marginTop = "1rem";
+    downloadBtn.style.background = "#e63946";
+    downloadBtn.style.color = "#fff";
+    downloadBtn.style.padding = "10px 20px";
+    downloadBtn.style.borderRadius = "6px";
+    downloadBtn.style.textDecoration = "none";
+    document.querySelector(".preview-container").appendChild(downloadBtn);
+} else {
+    downloadBtn.href = url;
+}
+
+// ✅ Always show remove button after processing
+removeImageBtn.style.display = "inline-block";
+
+} catch (err) {
+    console.error(err);
+    alert("❌ Failed to process image. Please try again.");
+
+    // Reset UI on failure
+    imagePreview.src = "";
+    imagePreview.style.display = "none";
+    removeImageBtn.style.display = "none";
+    const downloadBtn = document.getElementById("downloadBtn");
+    if (downloadBtn) downloadBtn.remove();
+}
+}
+
+// Remove image
+removeImageBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    imagePreview.src = "";
+    imagePreview.style.display = "none";
+    removeImageBtn.style.display = "none";
+    fileInput.value = "";
+    const downloadBtn = document.getElementById("downloadBtn");
+    if (downloadBtn) downloadBtn.remove();
+});
 
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
